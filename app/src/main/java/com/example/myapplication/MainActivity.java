@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView mTextViewQ;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +30,11 @@ public class MainActivity extends AppCompatActivity {
         mTextViewQ = findViewById(R.id.questionTextView);
 
 
+        setListener();
+
+    }
+
+    public void setListener() {
         mButtonTrue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -59,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
     }
 
 }
