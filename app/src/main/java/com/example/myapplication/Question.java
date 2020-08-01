@@ -20,4 +20,9 @@ public class Question {
     public void setAnswerTrue(boolean answerTrue) {
         mIsAnswerTrue = answerTrue;
     }
+
+    public Question(int questionTextResId, boolean isAnswerTrue) {
+        mQuestionTextResId = questionTextResId;
+        mIsAnswerTrue = isAnswerTrue;
+    }
 }
