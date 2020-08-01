@@ -16,18 +16,19 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/scoreString"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/score_string"
             android:textColor="#9C27B0"
-            android:textSize="30sp"
+            android:textSize="50sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
+            android:layout_marginStart="45dp"
             android:text="@string/zero_value"
             android:textColor="@color/colorAccent"
             android:textSize="36sp" />
@@ -57,6 +58,7 @@
             android:textStyle="bold" />
 
         <LinearLayout
+            android:id="@+id/arrowLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -65,6 +67,7 @@
                 android:id="@+id/imButtonLast"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/leftdoublearrow"
                 app:srcCompat="@drawable/ic_action_double_arrow_left" />
 
             <ImageButton
@@ -72,6 +75,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:contentDescription="@string/leftarrow"
                 app:srcCompat="@drawable/ic_action_arrow_left" />
 
             <ImageButton
@@ -79,32 +83,37 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:contentDescription="@string/rightarrow"
                 app:srcCompat="@drawable/ic_action_arrow_right" />
 
             <ImageButton
                 android:id="@+id/imButtonFirst"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/rightdoublearrow"
                 app:srcCompat="@drawable/ic_action_double_arrow_right" />
 
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/trueFalseLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="70dp"
+            android:layout_marginStart="70dp"
             android:orientation="horizontal">
 
             <ImageButton
                 android:id="@+id/imButtonWrong"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/wrongicon"
                 app:srcCompat="@drawable/ic_action_wrong" />
 
             <ImageButton
                 android:id="@+id/imButtonCorrect"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/correcticon"
                 app:srcCompat="@drawable/ic_action_correct" />
 
         </LinearLayout>

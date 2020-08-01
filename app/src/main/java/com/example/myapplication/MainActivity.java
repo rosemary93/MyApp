@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -34,10 +33,10 @@ public class MainActivity extends AppCompatActivity {
             new Question(R.string.question_americas, false),
             new Question(R.string.question_asia, false)
     };
-    private boolean[] answered = new boolean[mQuestionBank.length];
+    private boolean[] mAnswered = new boolean[mQuestionBank.length];
     private int mCurrentIndex = 0;
-    private int score = 0;
-    private int counter = 0;
+    private int mScore = 0;
+    private int mCounter = 0;
 
 
     @Override
@@ -66,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         mButtonTrue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (answered[mCurrentIndex]) {
+                if (mAnswered[mCurrentIndex]) {
                     mButtonTrue.setClickable(false);
                     mButtonFalse.setClickable(false);
                 } else {
@@ -79,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                if (answered[mCurrentIndex]) {
+                if (mAnswered[mCurrentIndex]) {
                     mButtonTrue.setClickable(false);
                     mButtonFalse.setClickable(false);
                 } else {
@@ -142,28 +141,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void checkAnswer(boolean userPressed) {
-        counter++;
+        mCounter++;
+        mAnswered[mCurrentIndex] = true;
         if (mQuestionBank[mCurrentIndex].isAnswerTrue() == userPressed) {
-            answered[mCurrentIndex] = true;
-            score++;
-            mTextViewScore.setText(String.valueOf(score));
+
+            mScore++;
+            mTextViewScore.setText(String.valueOf(mScore));
             Toast toastC = Toast.makeText(MainActivity.this, R.string.toast_correct, Toast.LENGTH_SHORT);
             TextView toastMessage = (TextView) toastC.getView().findViewById(android.R.id.message);
             toastMessage.setTextSize(20);
             toastMessage.setTextColor(Color.GREEN);
             toastC.show();
         } else {
-            answered[mCurrentIndex] = true;
-            score--;
-            mTextViewScore.setText(String.valueOf(score));
+            mScore--;
+            mTextViewScore.setText(String.valueOf(mScore));
             Toast toastW = Toast.makeText(MainActivity.this, R.string.toast_incorrect, Toast.LENGTH_SHORT);
-            toastW.setGravity(Gravity.TOP, 0, 0);
             TextView toastMessage = (TextView) toastW.getView().findViewById(android.R.id.message);
             toastMessage.setTextSize(20);
             toastMessage.setTextColor(Color.RED);
             toastW.show();
         }
-        if (counter == mQuestionBank.length) {
+        if (mCounter == mQuestionBank.length) {
             mplayingLayout.setVisibility(LinearLayout.GONE);
             mButtonReset.setVisibility(Button.VISIBLE);
 

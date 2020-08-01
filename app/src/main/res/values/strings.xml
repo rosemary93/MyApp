@@ -7,17 +7,22 @@
     <string name="false_button">نادرست</string>
     <string name="next_button">بعدی</string>
     <string name="previous_button">قبلی</string>
-    <string name="score_string">SCORE</string>
+    <string name="score_string">امتیاز</string>
     <string name="zero_value">0</string>
     <string name="reset">reset</string>
 
 
-    <string name="question">استرالیا بزرگترین قاره جهان است</string>
     <string name="question_australia">استرالیا بزرگ ترین قاره جهان است.</string>
     <string name="question_oceans">اقیانوس آرام بزرگ ترین اقیانوس جهان است.</string>
     <string name="question_mideast">همه کشورهای خاورمیانه عرب زبان هستند.</string>
     <string name="question_africa">مصر در قاره آفریقا قرار دارد.</string>
     <string name="question_americas">کشور آمریکا پرجمعیت ترین کشور دنیا است.</string>
     <string name="question_asia">قاره آسیا در نیم کره جنوبی جهان واقع شده است.</string>
+    <string name="leftdoublearrow">leftDoubleArrow</string>
+    <string name="leftarrow">leftArrow</string>
+    <string name="rightarrow">rightArrow</string>
+    <string name="rightdoublearrow">rightDoubleArrow</string>
+    <string name="wrongicon">wrongIcon</string>
+    <string name="correcticon">correctIcon</string>
 
 </resources>
