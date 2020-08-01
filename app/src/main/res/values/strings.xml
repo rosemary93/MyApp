@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="toast_correct">جواب شما صحیح می باشد</string>
+    <string name="toast_incorrect">جواب شما صحیح نمی باشد</string>
+    <string name="my_text">تهران پایتخت ایران است</string>
+    <string name="true_button">درست</string>
+    <string name="false_button">نادرست</string>
+</resources>
