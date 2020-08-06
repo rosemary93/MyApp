@@ -1,10 +1,12 @@
 package com.example.myapplication;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -14,6 +16,11 @@ import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final String BUNDLE_KEY_CURRENT_INDEX = "currentIndex";
+    private static final String BUNDLE_KEY_SCORE = "score";
+    private static final String BUNDLE_KEY_COUNTER = "counter";
+    private static final String BUNDLE_KEY_IS_ENABLED = "isEnable";
 
     private TextView mTextViewQ;
     private TextView mTextViewScore;
@@ -42,10 +49,27 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (savedInstanceState != null) {
+            mCurrentIndex=savedInstanceState.getInt(BUNDLE_KEY_CURRENT_INDEX,0);
+            mScore=savedInstanceState.getInt(BUNDLE_KEY_SCORE,0);
+            mAnswered=savedInstanceState.getBooleanArray(BUNDLE_KEY_IS_ENABLED);
+            mCounter=savedInstanceState.getInt(BUNDLE_KEY_COUNTER,0);
+        }
+
         setContentView(R.layout.activity_main);
         findViews();
         setListener();
-        mTextViewQ.setText(mQuestionBank[mCurrentIndex].getQuestionTextResId());
+        updateQuestion();
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(BUNDLE_KEY_SCORE,mScore);
+        outState.putInt(BUNDLE_KEY_COUNTER,mCounter);
+        outState.putInt(BUNDLE_KEY_CURRENT_INDEX,mCurrentIndex);
+        outState.putBooleanArray(BUNDLE_KEY_IS_ENABLED,mAnswered);
+
     }
 
     private void findViews() {
@@ -55,8 +79,8 @@ public class MainActivity extends AppCompatActivity {
         mButtonFalse = findViewById(R.id.imButtonWrong);
         mButtonNext = findViewById(R.id.imButtonNext);
         mButtonPrev = findViewById(R.id.imButtonPrev);
-        mButtonFirst = findViewById(R.id.imButtonFirst);
-        mButtonLast = findViewById(R.id.imButtonLast);
+        mButtonFirst = findViewById(R.id.imButtonLast);
+        mButtonLast = findViewById(R.id.imButtonFirst);
         mButtonReset = findViewById(R.id.resetButton);
         mplayingLayout = findViewById(R.id.playingLayout);
     }
