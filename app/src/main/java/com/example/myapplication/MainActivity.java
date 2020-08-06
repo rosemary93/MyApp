@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -32,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton mButtonLast;
     private Button mButtonReset;
     private LinearLayout mplayingLayout;
+    private LinearLayout rightArrows;
+    private LinearLayout leftArrows;
     private Question[] mQuestionBank = {
             new Question(R.string.question_australia, false),
             new Question(R.string.question_oceans, true),
@@ -49,15 +50,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        findViews();
         if (savedInstanceState != null) {
             mCurrentIndex=savedInstanceState.getInt(BUNDLE_KEY_CURRENT_INDEX,0);
             mScore=savedInstanceState.getInt(BUNDLE_KEY_SCORE,0);
             mAnswered=savedInstanceState.getBooleanArray(BUNDLE_KEY_IS_ENABLED);
             mCounter=savedInstanceState.getInt(BUNDLE_KEY_COUNTER,0);
+            updateUI();
         }
 
-        setContentView(R.layout.activity_main);
-        findViews();
         setListener();
         updateQuestion();
     }
@@ -69,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
         outState.putInt(BUNDLE_KEY_COUNTER,mCounter);
         outState.putInt(BUNDLE_KEY_CURRENT_INDEX,mCurrentIndex);
         outState.putBooleanArray(BUNDLE_KEY_IS_ENABLED,mAnswered);
+
 
     }
 
@@ -83,6 +86,8 @@ public class MainActivity extends AppCompatActivity {
         mButtonLast = findViewById(R.id.imButtonFirst);
         mButtonReset = findViewById(R.id.resetButton);
         mplayingLayout = findViewById(R.id.playingLayout);
+        rightArrows= findViewById(R.id.rightArrows);
+        leftArrows=findViewById(R.id.leftArrows);
     }
 
     public void setListener() {
@@ -185,12 +190,28 @@ public class MainActivity extends AppCompatActivity {
             toastMessage.setTextColor(Color.RED);
             toastW.show();
         }
+        checkGameIsOver();
+
+    }
+    public void updateUI()
+    {
+        mTextViewScore.setText(String.valueOf(mScore));
+        checkGameIsOver();
+    }
+
+    private void checkGameIsOver() {
         if (mCounter == mQuestionBank.length) {
+            if(mplayingLayout!= null)
             mplayingLayout.setVisibility(LinearLayout.GONE);
+
             mButtonReset.setVisibility(Button.VISIBLE);
+            if (rightArrows!=null && leftArrows!= null)
+            {
+                rightArrows.setVisibility(LinearLayout.GONE);
+                leftArrows.setVisibility(LinearLayout.GONE);
+            }
 
         }
-
     }
 
 }
