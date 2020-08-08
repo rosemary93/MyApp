@@ -1,6 +1,8 @@
 package com.example.myapplication;
 
-public class Question {
+
+
+public class Question  {
     //private String mText;
     private int mQuestionTextResId;
     private boolean mIsAnswerTrue;

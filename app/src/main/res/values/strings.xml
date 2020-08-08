@@ -27,6 +27,9 @@
     <string name="cheatButton">تقلب</string>
     <string name="cheat_question">آیا از تقلب اطمینان دارید؟</string>
     <string name="cheat_toast">آیا از تقلب اطمینان دارید؟</string>
+    <string name="you_cheat_toast">تقلب کار خوبی نیست</string>
     <string name="show_answer">نمایش تقلب</string>
+    <string name="button_setting">تنظیمات</string>
+    <string name="medium">Medium</string>
 
 </resources>

@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -14,13 +15,24 @@ public class CheatActivity extends AppCompatActivity {
     private Button mButtonShowAnswer;
     private TextView mTextViewAnswer;
     private boolean mIsAnswerTrue;
+    private boolean mCheatIsPressed;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cheat);
-
-        mIsAnswerTrue=getIntent().getBooleanExtra(MainActivity.EXTRA_QUESTION_ANSWER,false);
         findViews();
+        if(savedInstanceState!= null)
+        {
+            if (mIsAnswerTrue)
+            {
+                mTextViewAnswer.setText("درست");
+            }else {
+                mTextViewAnswer.setText("نادرست");
+            }
+
+        }
+        mIsAnswerTrue=getIntent().getBooleanExtra(MainActivity.EXTRA_QUESTION_ANSWER,false);
+
         setListener();
 
         Intent intent= new Intent();
@@ -46,5 +58,11 @@ public class CheatActivity extends AppCompatActivity {
     {
         mTextViewAnswer=findViewById(R.id.textViewAnswer);
         mButtonShowAnswer=findViewById(R.id.ButtonShowAnswer);
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean("cheatIsPressed",mCheatIsPressed);
     }
 }
