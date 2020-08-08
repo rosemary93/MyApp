@@ -12,6 +12,8 @@ import android.widget.TextView;
 public class CheatActivity extends AppCompatActivity {
 
     public static final String EXTRE_IS_CHEATED = "isCheated";
+    public static final String CHEAT_IS_PRESSED = "cheatIsPressed";
+    public static final String CORRECT_ANSWER = "correct answer";
     private Button mButtonShowAnswer;
     private TextView mTextViewAnswer;
     private boolean mIsAnswerTrue;
@@ -23,11 +25,14 @@ public class CheatActivity extends AppCompatActivity {
         findViews();
         if(savedInstanceState!= null)
         {
-            if (mIsAnswerTrue)
-            {
-                mTextViewAnswer.setText("درست");
-            }else {
-                mTextViewAnswer.setText("نادرست");
+            mCheatIsPressed=savedInstanceState.getBoolean(CHEAT_IS_PRESSED,false);
+            mIsAnswerTrue=savedInstanceState.getBoolean(CORRECT_ANSWER,false);
+            if (mCheatIsPressed) {
+                if (mIsAnswerTrue) {
+                    mTextViewAnswer.setText("درست");
+                } else {
+                    mTextViewAnswer.setText("نادرست");
+                }
             }
 
         }
@@ -44,11 +49,12 @@ public class CheatActivity extends AppCompatActivity {
         mButtonShowAnswer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mCheatIsPressed=true;
                 if (mIsAnswerTrue)
                 {
-                    mTextViewAnswer.setText("درست");
+                    mTextViewAnswer.setText(R.string.true_button);
                 }else {
-                    mTextViewAnswer.setText("نادرست");
+                    mTextViewAnswer.setText(R.string.false_button);
                 }
             }
         });
@@ -63,6 +69,7 @@ public class CheatActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putBoolean("cheatIsPressed",mCheatIsPressed);
+        outState.putBoolean(CHEAT_IS_PRESSED,mCheatIsPressed);
+        outState.putBoolean(CORRECT_ANSWER,mIsAnswerTrue);
     }
 }
