@@ -24,5 +24,9 @@
     <string name="rightdoublearrow">rightDoubleArrow</string>
     <string name="wrongicon">wrongIcon</string>
     <string name="correcticon">correctIcon</string>
+    <string name="cheatButton">تقلب</string>
+    <string name="cheat_question">آیا از تقلب اطمینان دارید؟</string>
+    <string name="cheat_toast">آیا از تقلب اطمینان دارید؟</string>
+    <string name="show_answer">نمایش تقلب</string>
 
 </resources>

@@ -1,8 +1,10 @@
 package com.example.myapplication;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -20,6 +22,9 @@ public class MainActivity extends AppCompatActivity {
     private static final String BUNDLE_KEY_SCORE = "score";
     private static final String BUNDLE_KEY_COUNTER = "counter";
     private static final String BUNDLE_KEY_IS_ENABLED = "isEnable";
+    public static final String EXTRA_QUESTION_ANSWER = "questionAnswer";
+    public static final int REQUEST_CODE_CHEAT = 0;
+
 
     private TextView mTextViewQ;
     private TextView mTextViewScore;
@@ -30,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton mButtonFirst;
     private ImageButton mButtonLast;
     private Button mButtonReset;
+    private Button mButtonCheat;
     private LinearLayout mplayingLayout;
     private LinearLayout rightArrows;
     private LinearLayout leftArrows;
@@ -45,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     private int mCurrentIndex = 0;
     private int mScore = 0;
     private int mCounter = 0;
+    private boolean mIsCheater=false;
 
 
     @Override
@@ -85,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
         mButtonFirst = findViewById(R.id.imButtonLast);
         mButtonLast = findViewById(R.id.imButtonFirst);
         mButtonReset = findViewById(R.id.resetButton);
+        mButtonCheat = findViewById(R.id.ButtonCheat);
         mplayingLayout = findViewById(R.id.playingLayout);
         rightArrows= findViewById(R.id.rightArrows);
         leftArrows=findViewById(R.id.leftArrows);
@@ -160,6 +168,28 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        mButtonCheat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,CheatActivity.class);
+                intent.putExtra(EXTRA_QUESTION_ANSWER,mQuestionBank[mCurrentIndex].isAnswerTrue());
+                startActivityForResult(intent, REQUEST_CODE_CHEAT);
+                //startActivity(intent);
+            }
+        });
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode!= Activity.RESULT_OK || data==null)
+            return;
+        if (requestCode == REQUEST_CODE_CHEAT){
+            mQuestionBank[mCurrentIndex].setIsCheater(data.getBooleanExtra(CheatActivity.EXTRE_IS_CHEATED,false));
+        }
+
+
     }
 
     private void updateQuestion() {
@@ -172,25 +202,32 @@ public class MainActivity extends AppCompatActivity {
     private void checkAnswer(boolean userPressed) {
         mCounter++;
         mAnswered[mCurrentIndex] = true;
-        if (mQuestionBank[mCurrentIndex].isAnswerTrue() == userPressed) {
-
-            mScore++;
-            mTextViewScore.setText(String.valueOf(mScore));
-            Toast toastC = Toast.makeText(MainActivity.this, R.string.toast_correct, Toast.LENGTH_SHORT);
-            TextView toastMessage = (TextView) toastC.getView().findViewById(android.R.id.message);
-            toastMessage.setTextSize(20);
-            toastMessage.setTextColor(Color.GREEN);
-            toastC.show();
-        } else {
-            mScore--;
-            mTextViewScore.setText(String.valueOf(mScore));
-            Toast toastW = Toast.makeText(MainActivity.this, R.string.toast_incorrect, Toast.LENGTH_SHORT);
-            TextView toastMessage = (TextView) toastW.getView().findViewById(android.R.id.message);
-            toastMessage.setTextSize(20);
-            toastMessage.setTextColor(Color.RED);
-            toastW.show();
+        if (mQuestionBank[mCurrentIndex].getIsCheater())
+        {
+            Toast.makeText(this, "تقلب کار خوبی نیست", Toast.LENGTH_SHORT).show();
         }
-        checkGameIsOver();
+        else {
+            if (mQuestionBank[mCurrentIndex].isAnswerTrue() == userPressed) {
+
+                mScore++;
+                mTextViewScore.setText(String.valueOf(mScore));
+                Toast toastC = Toast.makeText(MainActivity.this, R.string.toast_correct, Toast.LENGTH_SHORT);
+                TextView toastMessage = (TextView) toastC.getView().findViewById(android.R.id.message);
+                toastMessage.setTextSize(20);
+                toastMessage.setTextColor(Color.GREEN);
+                toastC.show();
+            } else {
+                mScore--;
+                mTextViewScore.setText(String.valueOf(mScore));
+                Toast toastW = Toast.makeText(MainActivity.this, R.string.toast_incorrect, Toast.LENGTH_SHORT);
+                TextView toastMessage = (TextView) toastW.getView().findViewById(android.R.id.message);
+                toastMessage.setTextSize(20);
+                toastMessage.setTextColor(Color.RED);
+                toastW.show();
+            }
+
+            checkGameIsOver();
+        }
 
     }
     public void updateUI()
@@ -203,7 +240,7 @@ public class MainActivity extends AppCompatActivity {
         if (mCounter == mQuestionBank.length) {
             if(mplayingLayout!= null)
             mplayingLayout.setVisibility(LinearLayout.GONE);
-
+            mButtonCheat.setVisibility(Button.GONE);
             mButtonReset.setVisibility(Button.VISIBLE);
             if (rightArrows!=null && leftArrows!= null)
             {

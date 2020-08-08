@@ -4,6 +4,15 @@ public class Question {
     //private String mText;
     private int mQuestionTextResId;
     private boolean mIsAnswerTrue;
+    private boolean mIsCheater;
+
+    public boolean getIsCheater() {
+        return mIsCheater;
+    }
+
+    public void setIsCheater(boolean cheater) {
+        mIsCheater = cheater;
+    }
 
     public int getQuestionTextResId() {
         return mQuestionTextResId;
