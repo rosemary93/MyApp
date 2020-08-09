@@ -5,8 +5,9 @@ package com.example.myapplication;
 public class Question  {
     //private String mText;
     private int mQuestionTextResId;
-    private boolean mIsAnswerTrue;
+    private boolean mCorrectAnswer;
     private boolean mIsCheater;
+    private boolean mIsAnswered;
 
     public boolean getIsCheater() {
         return mIsCheater;
@@ -24,16 +25,24 @@ public class Question  {
         mQuestionTextResId = questionTextResId;
     }
 
-    public boolean isAnswerTrue() {
-        return mIsAnswerTrue;
+    public boolean isCorrectAnswer() {
+        return mCorrectAnswer;
     }
 
-    public void setAnswerTrue(boolean answerTrue) {
-        mIsAnswerTrue = answerTrue;
+    public void setCorrectAnswer(boolean correctAnswer) {
+        mCorrectAnswer = correctAnswer;
     }
 
-    public Question(int questionTextResId, boolean isAnswerTrue) {
+    public boolean getIsAnswered() {
+        return mIsAnswered;
+    }
+
+    public void setIsAnswered(boolean answered) {
+        mIsAnswered = answered;
+    }
+
+    public Question(int questionTextResId, boolean correctAnswer) {
         mQuestionTextResId = questionTextResId;
-        mIsAnswerTrue = isAnswerTrue;
+        mCorrectAnswer = correctAnswer;
     }
 }

@@ -16,7 +16,7 @@ public class CheatActivity extends AppCompatActivity {
     public static final String CORRECT_ANSWER = "correct answer";
     private Button mButtonShowAnswer;
     private TextView mTextViewAnswer;
-    private boolean mIsAnswerTrue;
+    private boolean mCorrectAnswer;
     private boolean mCheatIsPressed;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,9 +26,9 @@ public class CheatActivity extends AppCompatActivity {
         if(savedInstanceState!= null)
         {
             mCheatIsPressed=savedInstanceState.getBoolean(CHEAT_IS_PRESSED,false);
-            mIsAnswerTrue=savedInstanceState.getBoolean(CORRECT_ANSWER,false);
+            mCorrectAnswer =savedInstanceState.getBoolean(CORRECT_ANSWER,false);
             if (mCheatIsPressed) {
-                if (mIsAnswerTrue) {
+                if (mCorrectAnswer) {
                     mTextViewAnswer.setText("درست");
                 } else {
                     mTextViewAnswer.setText("نادرست");
@@ -36,7 +36,7 @@ public class CheatActivity extends AppCompatActivity {
             }
 
         }
-        mIsAnswerTrue=getIntent().getBooleanExtra(MainActivity.EXTRA_QUESTION_ANSWER,false);
+        mCorrectAnswer =getIntent().getBooleanExtra(MainActivity.EXTRA_QUESTION_ANSWER,false);
 
         setListener();
 
@@ -50,7 +50,7 @@ public class CheatActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 mCheatIsPressed=true;
-                if (mIsAnswerTrue)
+                if (mCorrectAnswer)
                 {
                     mTextViewAnswer.setText(R.string.true_button);
                 }else {
@@ -70,6 +70,6 @@ public class CheatActivity extends AppCompatActivity {
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBoolean(CHEAT_IS_PRESSED,mCheatIsPressed);
-        outState.putBoolean(CORRECT_ANSWER,mIsAnswerTrue);
+        outState.putBoolean(CORRECT_ANSWER, mCorrectAnswer);
     }
 }
