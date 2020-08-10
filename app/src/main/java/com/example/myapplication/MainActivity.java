@@ -26,8 +26,9 @@ public class MainActivity extends AppCompatActivity {
     public static final String EXTRA_QUESTION_ANSWER = "questionAnswer";
     public static final int REQUEST_CODE_CHEAT = 0;
     public static final int REQUEST_CODE_SETTING = 1;
-    public static final String IS_CHEATER = "is cheater";
+    public static final String BUNDLE_KEY_IS_CHEATER = "is cheater";
     public static final String IS_ANSWERED = "is answered";
+    public static final String EXTRA_FONT_SIZE = "font size";
 
 
     private TextView mTextViewQ;
@@ -57,8 +58,7 @@ public class MainActivity extends AppCompatActivity {
     private int mCurrentIndex = 0;
     private int mScore = 0;
     private int mCounter = 0;
-    private boolean mIsCheater=false;
-    private int mFontSize=-2;
+    private int mFontSize = -2;
 
 
     @Override
@@ -67,11 +67,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         findViews();
         if (savedInstanceState != null) {
-            mCurrentIndex=savedInstanceState.getInt(BUNDLE_KEY_CURRENT_INDEX,0);
-            mScore=savedInstanceState.getInt(BUNDLE_KEY_SCORE,0);
-            mCounter=savedInstanceState.getInt(BUNDLE_KEY_COUNTER,0);
-            mQuestionBank[mCurrentIndex].setIsAnswered(savedInstanceState.getBoolean(BUNDLE_KEY_IS_ENABLED));
-            mQuestionBank[mCurrentIndex].setIsCheater(savedInstanceState.getBoolean(IS_CHEATER,false));
+            mCurrentIndex = savedInstanceState.getInt(BUNDLE_KEY_CURRENT_INDEX, 0);
+            mScore = savedInstanceState.getInt(BUNDLE_KEY_SCORE, 0);
+            mCounter = savedInstanceState.getInt(BUNDLE_KEY_COUNTER, 0);
+            mQuestionBank[mCurrentIndex].setIsAnswered(savedInstanceState.getBoolean(IS_ANSWERED));
+            mQuestionBank[mCurrentIndex].setIsCheater(savedInstanceState.getBoolean(BUNDLE_KEY_IS_CHEATER, false));
             updateUI();
         }
 
@@ -80,29 +80,37 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setTextSize(float size) {
-        mTextViewQ.setTextSize(TypedValue.COMPLEX_UNIT_SP,size);
-        mTextViewScoreString.setTextSize(TypedValue.COMPLEX_UNIT_SP,size);
-        mTextViewScore.setTextSize(TypedValue.COMPLEX_UNIT_SP,size);
-        mButtonCheat.setTextSize(TypedValue.COMPLEX_UNIT_SP,size);
-        mButtonSetting.setTextSize(TypedValue.COMPLEX_UNIT_SP,size);
+        mTextViewQ.setTextSize(TypedValue.COMPLEX_UNIT_SP, size);
+        mTextViewScoreString.setTextSize(TypedValue.COMPLEX_UNIT_SP, size);
+        mTextViewScore.setTextSize(TypedValue.COMPLEX_UNIT_SP, size);
+        mButtonCheat.setTextSize(TypedValue.COMPLEX_UNIT_SP, size);
+        mButtonSetting.setTextSize(TypedValue.COMPLEX_UNIT_SP, size);
 
+    }
+
+    private void setDefaultTextSize() {
+        mTextViewScoreString.setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
+        mTextViewScore.setTextSize(TypedValue.COMPLEX_UNIT_SP, 36);
+        mTextViewQ.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
+        mButtonCheat.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
+        mButtonSetting.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
     }
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt(BUNDLE_KEY_SCORE,mScore);
-        outState.putInt(BUNDLE_KEY_COUNTER,mCounter);
-        outState.putInt(BUNDLE_KEY_CURRENT_INDEX,mCurrentIndex);
-        outState.putBoolean(IS_CHEATER,mQuestionBank[mCurrentIndex].getIsCheater());
-        outState.putBoolean(IS_ANSWERED,mQuestionBank[mCurrentIndex].getIsAnswered());
+        outState.putInt(BUNDLE_KEY_SCORE, mScore);
+        outState.putInt(BUNDLE_KEY_COUNTER, mCounter);
+        outState.putInt(BUNDLE_KEY_CURRENT_INDEX, mCurrentIndex);
+        outState.putBoolean(BUNDLE_KEY_IS_CHEATER, mQuestionBank[mCurrentIndex].getIsCheater());
+        outState.putBoolean(IS_ANSWERED, mQuestionBank[mCurrentIndex].getIsAnswered());
 
     }
 
     private void findViews() {
         mTextViewQ = findViewById(R.id.questionTextView);
         mTextViewScore = findViewById(R.id.score);
-        mTextViewScoreString=findViewById(R.id.scoreString);
+        mTextViewScoreString = findViewById(R.id.scoreString);
         mButtonTrue = findViewById(R.id.imButtonCorrect);
         mButtonFalse = findViewById(R.id.imButtonWrong);
         mButtonNext = findViewById(R.id.imButtonNext);
@@ -111,10 +119,10 @@ public class MainActivity extends AppCompatActivity {
         mButtonLast = findViewById(R.id.imButtonFirst);
         mButtonReset = findViewById(R.id.resetButton);
         mButtonCheat = findViewById(R.id.ButtonCheat);
-        mButtonSetting= findViewById(R.id.ButtonSetting);
+        mButtonSetting = findViewById(R.id.ButtonSetting);
         mplayingLayout = findViewById(R.id.playingLayout);
-        rightArrows= findViewById(R.id.rightArrows);
-        leftArrows=findViewById(R.id.leftArrows);
+        rightArrows = findViewById(R.id.rightArrows);
+        leftArrows = findViewById(R.id.leftArrows);
     }
 
     public void setListener() {
@@ -190,8 +198,8 @@ public class MainActivity extends AppCompatActivity {
         mButtonCheat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,CheatActivity.class);
-                intent.putExtra(EXTRA_QUESTION_ANSWER,mQuestionBank[mCurrentIndex].isCorrectAnswer());
+                Intent intent = new Intent(MainActivity.this, CheatActivity.class);
+                intent.putExtra(EXTRA_QUESTION_ANSWER, mQuestionBank[mCurrentIndex].isCorrectAnswer());
                 startActivityForResult(intent, REQUEST_CODE_CHEAT);
                 //startActivity(intent);
             }
@@ -200,8 +208,9 @@ public class MainActivity extends AppCompatActivity {
         mButtonSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            Intent intent= new Intent(MainActivity.this,SettingActivity.class);
-            startActivityForResult(intent, REQUEST_CODE_SETTING);
+                Intent intent = new Intent(MainActivity.this, SettingActivity.class);
+                intent.putExtra(EXTRA_FONT_SIZE, mFontSize);
+                startActivityForResult(intent, REQUEST_CODE_SETTING);
             }
         });
 
@@ -210,13 +219,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode!= Activity.RESULT_OK || data==null)
+        if (resultCode != Activity.RESULT_OK || data == null)
             return;
-        if (requestCode == REQUEST_CODE_CHEAT){
-            mQuestionBank[mCurrentIndex].setIsCheater(data.getBooleanExtra(CheatActivity.EXTRE_IS_CHEATED,false));
+        if (requestCode == REQUEST_CODE_CHEAT) {
+            mQuestionBank[mCurrentIndex].setIsCheater(data.getBooleanExtra(CheatActivity.EXTRE_IS_CHEATED, false));
         }
         if (requestCode == REQUEST_CODE_SETTING) {
-            mFontSize = data.getIntExtra(SettingActivity.EXTRA_FONT, 0);
+            mFontSize = data.getIntExtra(SettingActivity.EXTRA_FONT, -2);
             updateTextsSize();
         }
 
@@ -233,11 +242,9 @@ public class MainActivity extends AppCompatActivity {
     private void checkAnswer(boolean userPressed) {
         mCounter++;
         mQuestionBank[mCurrentIndex].setIsAnswered(true);
-        if (mQuestionBank[mCurrentIndex].getIsCheater())
-        {
+        if (mQuestionBank[mCurrentIndex].getIsCheater()) {
             Toast.makeText(this, R.string.you_cheat_toast, Toast.LENGTH_SHORT).show();
-        }
-        else {
+        } else {
             if (mQuestionBank[mCurrentIndex].isCorrectAnswer() == userPressed) {
 
                 mScore++;
@@ -261,15 +268,18 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-    public void updateUI()
-    {
+
+    public void updateUI() {
         mTextViewScore.setText(String.valueOf(mScore));
         checkGameIsOver();
     }
 
     private void updateTextsSize() {
         switch (mFontSize) {
-            case -1 :
+            case -2:
+                setDefaultTextSize();
+                break;
+            case -1:
                 setTextSize(14);
                 break;
             case 0:
@@ -283,12 +293,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void checkGameIsOver() {
         if (mCounter == mQuestionBank.length) {
-            if(mplayingLayout!= null)
-            mplayingLayout.setVisibility(LinearLayout.GONE);
+            if (mplayingLayout != null)
+                mplayingLayout.setVisibility(LinearLayout.GONE);
             mButtonCheat.setVisibility(Button.GONE);
             mButtonReset.setVisibility(Button.VISIBLE);
-            if (rightArrows!=null && leftArrows!= null)
-            {
+            if (rightArrows != null && leftArrows != null) {
                 rightArrows.setVisibility(LinearLayout.GONE);
                 leftArrows.setVisibility(LinearLayout.GONE);
             }

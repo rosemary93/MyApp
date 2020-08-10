@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#98A5EF"
     android:orientation="vertical"
     tools:context=".SettingActivity">
 
@@ -19,26 +19,46 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="monospace"
             android:text="Font"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="#025981"
+            android:textSize="24sp"
+            android:textStyle="bold|italic" />
+
+        <RadioButton
+            android:id="@+id/radioButtonDefault"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:buttonTint="#BD07B4"
+            android:text="Default"
             android:textSize="18sp" />
 
         <RadioButton
             android:id="@+id/radioButtonSmall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="small" />
+            android:buttonTint="#BD07B4"
+            android:text="Small"
+            android:textSize="18sp" />
 
         <RadioButton
             android:id="@+id/radioButtonMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/medium" />
+            android:buttonTint="#BD07B4"
+            android:buttonTintMode="src_in"
+            android:text="@string/medium"
+            android:textSize="18sp" />
 
         <RadioButton
             android:id="@+id/radioButtonLarge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Large" />
+            android:buttonTint="#BD07B4"
+            android:text="Large"
+            android:textSize="18sp" />
 
     </LinearLayout>
 
