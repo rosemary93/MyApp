@@ -11,7 +11,7 @@
     tools:context=".MainActivity">
 
     <LinearLayout
-        android:id="@+id/mainLayout"
+        android:id="@+id/linearMainLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -146,7 +146,7 @@
         android:id="@+id/ButtonSetting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
+        android:layout_gravity="bottom|end"
         android:layout_margin="20dp"
         android:text="@string/button_setting"
         android:textColor="#000000"

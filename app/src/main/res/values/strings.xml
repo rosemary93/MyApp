@@ -31,5 +31,14 @@
     <string name="show_answer">نمایش تقلب</string>
     <string name="button_setting">تنظیمات</string>
     <string name="medium">Medium</string>
+    <string name="fontString">Font</string>
+    <string name="smallString">Small</string>
+    <string name="largeString">Large</string>
+    <string name="background_color">Background Color</string>
+    <string name="light_blue">Light Blue</string>
+    <string name="light_green">Light Green</string>
+    <string name="light_red">Light Red</string>
+    <string name="white_default">White (Default)</string>
+    <string name="default_string">Default</string>
 
 </resources>

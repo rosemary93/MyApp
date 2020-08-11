@@ -11,7 +11,7 @@
         android:id="@+id/FontLinearLayout"
         android:layout_width="103dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="top|left"
+        android:layout_gravity="start|top"
         android:layout_margin="15dp"
         android:orientation="vertical">
 
@@ -22,7 +22,7 @@
             android:layout_gravity="center"
             android:layout_marginBottom="10dp"
             android:fontFamily="sans-serif"
-            android:text="Font"
+            android:text="@string/fontString"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textColor="#025981"
             android:textSize="24sp"
@@ -33,7 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:buttonTint="#BD07B4"
-            android:text="Default"
+            android:text="@string/default_string"
             android:textSize="18sp" />
 
         <RadioButton
@@ -41,7 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:buttonTint="#BD07B4"
-            android:text="Small"
+            android:text="@string/smallString"
             android:textSize="18sp" />
 
         <RadioButton
@@ -58,7 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:buttonTint="#BD07B4"
-            android:text="Large"
+            android:text="@string/largeString"
             android:textSize="18sp" />
 
     </LinearLayout>
@@ -76,7 +76,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:text="Background Color"
+            android:text="@string/background_color"
             android:textColor="#025981"
             android:textSize="24sp"
             android:textStyle="bold|italic" />
@@ -91,7 +91,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:buttonTint="#FFFFFF"
-                android:text="White (Default)"
+                android:text="@string/white_default"
                 android:textSize="18sp" />
 
             <RadioButton
@@ -99,7 +99,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:buttonTint="#FA8F8F"
-                android:text="Light Red"
+                android:text="@string/light_red"
                 android:textSize="18sp" />
 
             <RadioButton
@@ -107,7 +107,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:buttonTint="#4FEAFF"
-                android:text="Light Blue"
+                android:text="@string/light_blue"
                 android:textSize="18sp" />
 
             <RadioButton
@@ -115,7 +115,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:buttonTint="#00FD0A"
-                android:text="Light Green"
+                android:text="@string/light_green"
                 android:textSize="18sp" />
         </RadioGroup>
     </LinearLayout>
