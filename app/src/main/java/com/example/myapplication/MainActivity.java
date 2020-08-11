@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -22,13 +23,15 @@ public class MainActivity extends AppCompatActivity {
     private static final String BUNDLE_KEY_CURRENT_INDEX = "currentIndex";
     private static final String BUNDLE_KEY_SCORE = "score";
     private static final String BUNDLE_KEY_COUNTER = "counter";
-    private static final String BUNDLE_KEY_IS_ENABLED = "isEnable";
     public static final String EXTRA_QUESTION_ANSWER = "questionAnswer";
     public static final int REQUEST_CODE_CHEAT = 0;
     public static final int REQUEST_CODE_SETTING = 1;
     public static final String BUNDLE_KEY_IS_CHEATER = "is cheater";
-    public static final String IS_ANSWERED = "is answered";
+    public static final String BUNDLE_KEY_IS_ANSWERED = "is answered";
     public static final String EXTRA_FONT_SIZE = "font size";
+    public static final String EXTRA_BACKGOUND_COLOR = "backgound color";
+    public static final String BUNDLE_KEY_FONT_SIZE = "fontSize";
+    public static final String BUNDLE_KEY_BACKGROUND_COLOR = "background color";
 
 
     private TextView mTextViewQ;
@@ -46,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout mplayingLayout;
     private LinearLayout rightArrows;
     private LinearLayout leftArrows;
+    private FrameLayout mMainLayout;
     private Question[] mQuestionBank = {
             new Question(R.string.question_australia, false),
             new Question(R.string.question_oceans, true),
@@ -54,11 +58,11 @@ public class MainActivity extends AppCompatActivity {
             new Question(R.string.question_americas, false),
             new Question(R.string.question_asia, false)
     };
-    private boolean[] mAnswered = new boolean[mQuestionBank.length];
     private int mCurrentIndex = 0;
     private int mScore = 0;
     private int mCounter = 0;
     private int mFontSize = -2;
+    private String mBackgroundColor="white";
 
 
     @Override
@@ -70,8 +74,10 @@ public class MainActivity extends AppCompatActivity {
             mCurrentIndex = savedInstanceState.getInt(BUNDLE_KEY_CURRENT_INDEX, 0);
             mScore = savedInstanceState.getInt(BUNDLE_KEY_SCORE, 0);
             mCounter = savedInstanceState.getInt(BUNDLE_KEY_COUNTER, 0);
-            mQuestionBank[mCurrentIndex].setIsAnswered(savedInstanceState.getBoolean(IS_ANSWERED));
+            mQuestionBank[mCurrentIndex].setIsAnswered(savedInstanceState.getBoolean(BUNDLE_KEY_IS_ANSWERED));
             mQuestionBank[mCurrentIndex].setIsCheater(savedInstanceState.getBoolean(BUNDLE_KEY_IS_CHEATER, false));
+            mFontSize=savedInstanceState.getInt(BUNDLE_KEY_FONT_SIZE,-2);
+            mBackgroundColor=savedInstanceState.getString(BUNDLE_KEY_BACKGROUND_COLOR,"white");
             updateUI();
         }
 
@@ -103,7 +109,9 @@ public class MainActivity extends AppCompatActivity {
         outState.putInt(BUNDLE_KEY_COUNTER, mCounter);
         outState.putInt(BUNDLE_KEY_CURRENT_INDEX, mCurrentIndex);
         outState.putBoolean(BUNDLE_KEY_IS_CHEATER, mQuestionBank[mCurrentIndex].getIsCheater());
-        outState.putBoolean(IS_ANSWERED, mQuestionBank[mCurrentIndex].getIsAnswered());
+        outState.putBoolean(BUNDLE_KEY_IS_ANSWERED, mQuestionBank[mCurrentIndex].getIsAnswered());
+        outState.putInt(BUNDLE_KEY_FONT_SIZE,mFontSize);
+        outState.putCharSequence(BUNDLE_KEY_BACKGROUND_COLOR,mBackgroundColor);
 
     }
 
@@ -123,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
         mplayingLayout = findViewById(R.id.playingLayout);
         rightArrows = findViewById(R.id.rightArrows);
         leftArrows = findViewById(R.id.leftArrows);
+        mMainLayout =findViewById(R.id.mainLayout);
     }
 
     public void setListener() {
@@ -210,6 +219,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, SettingActivity.class);
                 intent.putExtra(EXTRA_FONT_SIZE, mFontSize);
+                intent.putExtra(EXTRA_BACKGOUND_COLOR,mBackgroundColor);
                 startActivityForResult(intent, REQUEST_CODE_SETTING);
             }
         });
@@ -227,7 +237,10 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == REQUEST_CODE_SETTING) {
             mFontSize = data.getIntExtra(SettingActivity.EXTRA_FONT, -2);
             updateTextsSize();
+            mBackgroundColor=data.getStringExtra(SettingActivity.EXTRA_BACKGROUND_COLOR);
+            updateBackgroundColor();
         }
+
 
     }
 
@@ -271,6 +284,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void updateUI() {
         mTextViewScore.setText(String.valueOf(mScore));
+        updateTextsSize();
+        updateBackgroundColor();
         checkGameIsOver();
     }
 
@@ -287,6 +302,24 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case 1:
                 setTextSize(26);
+
+        }
+    }
+
+    private void updateBackgroundColor()
+    {
+        switch (mBackgroundColor){
+            case "white":
+                mMainLayout.setBackgroundColor(Color.WHITE);
+                break;
+            case "blue":
+                mMainLayout.setBackgroundColor(getResources().getColor(R.color.lightBlue));
+                break;
+            case "red":
+                mMainLayout.setBackgroundColor(getResources().getColor(R.color.lightRed));
+                break;
+            case "green":
+                mMainLayout.setBackgroundColor(getResources().getColor(R.color.lightGreen));
 
         }
     }

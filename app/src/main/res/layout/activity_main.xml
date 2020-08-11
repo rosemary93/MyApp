@@ -1,141 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/mainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    android:layout_gravity="center"
+    android:gravity="bottom|center"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
     <LinearLayout
-        android:id="@+id/scoreLayout"
+        android:id="@+id/mainLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/scoreString"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/score_string"
-            android:textColor="#9C27B0"
-            android:textSize="50sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/score"
+        <LinearLayout
+            android:id="@+id/scoreLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/zero_value"
-            android:textColor="@color/colorAccent"
-            android:textSize="36sp" />
+            android:orientation="vertical">
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/scoreString"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/score_string"
+                android:textColor="#9C27B0"
+                android:textSize="50sp"
+                android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/resetButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/reset"
-        android:visibility="gone"
-        tools:visibility="gone" />
+            <TextView
+                android:id="@+id/score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/zero_value"
+                android:textColor="@color/colorAccent"
+                android:textSize="36sp" />
 
-    <LinearLayout
-        android:id="@+id/playingLayout"
-        android:layout_width="236dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/questionTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="4dp"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+        </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/leftArrows"
+            android:id="@+id/playingLayout"
+            android:layout_width="236dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/questionTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/leftArrows"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/imButtonFirst"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/leftdoublearrow"
+                    app:srcCompat="@drawable/ic_action_double_arrow_left" />
+
+                <ImageButton
+                    android:id="@+id/imButtonPrev"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/leftarrow"
+                    app:srcCompat="@drawable/ic_action_arrow_left" />
+
+                <ImageButton
+                    android:id="@+id/imButtonNext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/rightarrow"
+                    app:srcCompat="@drawable/ic_action_arrow_right" />
+
+                <ImageButton
+                    android:id="@+id/imButtonLast"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/rightdoublearrow"
+                    app:srcCompat="@drawable/ic_action_double_arrow_right" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/trueFalseLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="clip_horizontal"
+                android:layout_marginStart="70dp"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/imButtonWrong"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/wrongicon"
+                    app:srcCompat="@drawable/ic_action_wrong" />
+
+                <ImageButton
+                    android:id="@+id/imButtonCorrect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/correcticon"
+                    app:srcCompat="@drawable/ic_action_correct" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/resetButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:text="@string/reset"
+            android:visibility="gone"
+            tools:visibility="gone" />
 
-            <ImageButton
-                android:id="@+id/imButtonFirst"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/leftdoublearrow"
-                app:srcCompat="@drawable/ic_action_double_arrow_left" />
-
-            <ImageButton
-                android:id="@+id/imButtonPrev"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:contentDescription="@string/leftarrow"
-                app:srcCompat="@drawable/ic_action_arrow_left" />
-
-            <ImageButton
-                android:id="@+id/imButtonNext"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:contentDescription="@string/rightarrow"
-                app:srcCompat="@drawable/ic_action_arrow_right" />
-
-            <ImageButton
-                android:id="@+id/imButtonLast"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/rightdoublearrow"
-                app:srcCompat="@drawable/ic_action_double_arrow_right" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/trueFalseLayout"
+        <Button
+            android:id="@+id/ButtonCheat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="clip_horizontal"
-            android:layout_marginStart="70dp"
-            android:orientation="horizontal">
+            android:layout_gravity="bottom|center"
+            android:layout_marginTop="10dp"
+            android:text="@string/cheatButton"
+            android:textColor="#000000"
+            android:textSize="24sp" />
 
-            <ImageButton
-                android:id="@+id/imButtonWrong"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/wrongicon"
-                app:srcCompat="@drawable/ic_action_wrong" />
-
-            <ImageButton
-                android:id="@+id/imButtonCorrect"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/correcticon"
-                app:srcCompat="@drawable/ic_action_correct" />
-
-        </LinearLayout>
     </LinearLayout>
-
-    <Button
-        android:id="@+id/ButtonCheat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/cheatButton"
-        android:textColor="#000000"
-        android:textSize="24sp" />
 
     <Button
         android:id="@+id/ButtonSetting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
+        android:layout_margin="20dp"
         android:text="@string/button_setting"
         android:textColor="#000000"
         android:textSize="24sp" />
 
-</LinearLayout>
+</FrameLayout>

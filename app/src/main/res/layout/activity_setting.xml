@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,8 +9,10 @@
     tools:context=".SettingActivity">
 
     <LinearLayout
+        android:id="@+id/FontLinearLayout"
         android:layout_width="103dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="top|left"
         android:layout_margin="15dp"
         android:orientation="vertical">
 
@@ -20,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="10dp"
-            android:fontFamily="monospace"
+            android:fontFamily="sans-serif"
             android:text="Font"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textColor="#025981"
@@ -28,7 +30,7 @@
             android:textStyle="bold|italic" />
 
         <RadioButton
-            android:id="@+id/radioButtonDefault"
+            android:id="@+id/radioButtonDefaultFont"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:buttonTint="#BD07B4"
@@ -36,7 +38,7 @@
             android:textSize="18sp" />
 
         <RadioButton
-            android:id="@+id/radioButtonSmall"
+            android:id="@+id/radioButtonSmallFont"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:buttonTint="#BD07B4"
@@ -44,7 +46,7 @@
             android:textSize="18sp" />
 
         <RadioButton
-            android:id="@+id/radioButtonMedium"
+            android:id="@+id/radioButtonMediumFont"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:buttonTint="#BD07B4"
@@ -53,7 +55,7 @@
             android:textSize="18sp" />
 
         <RadioButton
-            android:id="@+id/radioButtonLarge"
+            android:id="@+id/radioButtonLargeFont"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:buttonTint="#BD07B4"
@@ -62,4 +64,61 @@
 
     </LinearLayout>
 
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/BackgrndColorLinearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|top"
+        android:layout_margin="15dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/backgroundColorString"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="Background Color"
+            android:textColor="#025981"
+            android:textSize="24sp"
+            android:textStyle="bold|italic" />
+
+        <RadioGroup
+            android:id="@+id/radioGroupBckColor"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RadioButton
+                android:id="@+id/radioButtonWhiteColor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="#FFFFFF"
+                android:text="White (Default)"
+                android:textSize="18sp" />
+
+            <RadioButton
+                android:id="@+id/radioButtonRedColor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="#FA8F8F"
+                android:text="Light Red"
+                android:textSize="18sp" />
+
+            <RadioButton
+                android:id="@+id/radioButtonBlueColor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="#4FEAFF"
+                android:text="Light Blue"
+                android:textSize="18sp" />
+
+            <RadioButton
+                android:id="@+id/radioButtonGreenColor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="#00FD0A"
+                android:text="Light Green"
+                android:textSize="18sp" />
+        </RadioGroup>
+    </LinearLayout>
+
+</FrameLayout>
