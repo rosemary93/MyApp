@@ -41,4 +41,6 @@
     <string name="white_default">White (Default)</string>
     <string name="default_string">Default</string>
 
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

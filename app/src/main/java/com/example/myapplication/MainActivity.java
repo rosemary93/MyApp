@@ -232,7 +232,7 @@ public class MainActivity extends AppCompatActivity {
         if (resultCode != Activity.RESULT_OK || data == null)
             return;
         if (requestCode == REQUEST_CODE_CHEAT) {
-            mQuestionBank[mCurrentIndex].setIsCheater(data.getBooleanExtra(CheatActivity.EXTRE_IS_CHEATED, false));
+            mQuestionBank[mCurrentIndex].setIsCheater(data.getBooleanExtra(CheatFragment.EXTRE_IS_CHEATED, false));
         }
         if (requestCode == REQUEST_CODE_SETTING) {
             mFontSize = data.getIntExtra(SettingActivity.EXTRA_FONT, -2);

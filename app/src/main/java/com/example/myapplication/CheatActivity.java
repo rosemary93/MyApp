@@ -1,29 +1,33 @@
 package com.example.myapplication;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+
 
 public class CheatActivity extends AppCompatActivity {
 
-    public static final String EXTRE_IS_CHEATED = "isCheated";
+   /* public static final String EXTRE_IS_CHEATED = "isCheated";
     public static final String CHEAT_IS_PRESSED = "cheatIsPressed";
     public static final String CORRECT_ANSWER = "correct answer";
     private Button mButtonShowAnswer;
     private TextView mTextViewAnswer;
     private boolean mCorrectAnswer;
-    private boolean mCheatIsPressed;
+    private boolean mCheatIsPressed;*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cheat);
-        findViews();
-        if(savedInstanceState!= null)
+        FragmentManager fragmentManager=getSupportFragmentManager();
+        Fragment fragment=fragmentManager.findFragmentById(R.id.cheatFragmentContainer);
+        if (fragment==null) {
+            CheatFragment cheatFragment=new CheatFragment();
+            fragmentManager.beginTransaction().add(R.id.cheatFragmentContainer,cheatFragment).commit();
+        }
+//        findViews();
+        /*if(savedInstanceState!= null)
         {
             mCheatIsPressed=savedInstanceState.getBoolean(CHEAT_IS_PRESSED,false);
             mCorrectAnswer =savedInstanceState.getBoolean(CORRECT_ANSWER,false);
@@ -71,5 +75,5 @@ public class CheatActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
         outState.putBoolean(CHEAT_IS_PRESSED,mCheatIsPressed);
         outState.putBoolean(CORRECT_ANSWER, mCorrectAnswer);
-    }
-}
+    }*/
+}}
